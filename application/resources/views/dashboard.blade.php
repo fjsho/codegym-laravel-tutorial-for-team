@@ -25,21 +25,16 @@
             </div>
         </div>
 
-        <form method="GET" action="{{-- route('tasks.index', ['project' => $project->id]) --}}">
+        <form method="GET" action="{{--route('tasks.index', ['project' => $project->id])--}}">
             <!-- Validation Errors -->
             <x-flash-message />
             <x-validation-errors :errors="$errors" />
 
             <!-- Navigation -->
             <div class="flex max-w-full mx-auto px-4 py-6 sm:px-6 lg:px-6">
-                <div class="md:w-1/4 px-3 mb-6">
-                    <x-label for="assigner_id" :value="__('Assigner')" class="{{-- $errors->has('assigner_id') ? 'text-red-600' :'' --}}" />
-                    {{-- <x-select :options="$assigners" id="assigner_id" class="block mt-1 w-full $errors->has('assigner_id') ? 'border-red-600' :''" type="text" name="assigner_id" :value="$assigner_id" autofocus /> --}}
-                </div>
-
                 <div class="md:w-1/3 px-3 mb-6 mr-6">
-                    <x-label for="key" :value="__('Keyword')" class="{{-- $errors->has('keyword') ? 'text-red-600' :'' --}}" />
-                    {{-- <x-input id="keyword" class="block mt-1 w-full $errors->has('keyword') ? 'border-red-600' :''" type="text" name="keyword" :value="$keyword" :placeholder="__('Keyword')" autofocus /> --}}
+                    <x-label for="key" :value="__('Keyword')" class="{{$errors->has('keyword') ? 'text-red-600' :''}}" />
+                    <x-input id="keyword" class="block mt-1 w-full $errors->has('keyword') ? 'border-red-600' :''" type="text" name="keyword" {{--:value="$keyword"--}} :placeholder="__('Keyword')" autofocus />
                 </div>
                 <div class="flex flex-wrap content-center">
                     <x-button class="px-10">
