@@ -53,29 +53,35 @@
                         <thead>
                             <tr class="bg-gray-200 text-gray-600 text-sm leading-normal">
                                 <th class="py-3 px-6 text-left">
-                                    @sortablelink('task_kind.name', __('Task Kind'))
+                                    @sortablelink('id', __('Task Key'))
                                 </th>
                                 <th class="py-3 px-6 text-left">
-                                    @sortablelink('id', __('Task Key'))
+                                    @sortablelink('task_kind.name', __('Task Kind'))
                                 </th>
                                 <th class="py-3 px-6 text-left">
                                     @sortablelink('name', __('Task Name'))
                                 </th>
                                 <th class="py-3 px-6 text-left">
-                                    @sortablelink('assigner.name', __('Task Assigner'))
+                                    @sortablelink('task_status.name', __('Task Status'))
                                 </th>
-                                <th class="py-3 px-6 text-center">
+                                {{-- <th class="py-3 px-6 text-center">
                                     @sortablelink('created_at', __('Created At'))
-                                </th>
+                                </th> --}}
                                 <th class="py-3 px-6 text-center">
                                     @sortablelink('due_date', __('Due Date'))
                                 </th>
                                 <th class="py-3 px-6 text-center">
-                                    @sortablelink('updated_at', __('Updated At'))
+                                    @sortablelink('task_priority.name', __('Task Priority'))
                                 </th>
                                 <th class="py-3 px-6 text-center">
-                                    @sortablelink('user.name', __('Created User'))
+                                    @sortablelink('actual_time', __('Actual Time'))
                                 </th>
+                                {{-- <th class="py-3 px-6 text-center">
+                                    @sortablelink('updated_at', __('Updated At'))
+                                </th> --}}
+                                {{-- <th class="py-3 px-6 text-center">
+                                    @sortablelink('user.name', __('Created User'))
+                                </th> --}}
                             </tr>
                         </thead>
                         <tbody class="text-gray-600 text-sm font-light">
