@@ -37,8 +37,9 @@ class Dashboard extends Controller
             ->with('assigner')
             ->with('user')
             ->with('project')
-            ->join('projects', 'tasks.project_id', 'projects.id')
-            ->where('project_id', '=', $project->id);
+            //->with('優先度')
+            ->join('projects', 'tasks.project_id', 'projects.id') 
+            ->where('assigner_id', '=', $request->user()->id);
         if ($request->has('keyword') && $keyword != '') {
             $tasks
                 ->join('users as search_users', 'tasks.created_user_id', 'search_users.id')
