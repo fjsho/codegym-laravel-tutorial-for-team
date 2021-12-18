@@ -22,7 +22,6 @@ class Dashboard extends Controller
     {
         $request->validate([
             'keyword' => 'max:255',
-            'assigner_id' => 'nullable|integer',
         ]);
 
         $assigners = User::all();
