@@ -25,7 +25,7 @@
             </div>
         </div>
 
-        <form method="GET" action="{{--route('tasks.index', ['project' => $project->id])--}}">
+        <form method="GET" action="{{route('dashboard', ['project' => $project->id, 'user' => $user->id])}}">
             <!-- Validation Errors -->
             <x-flash-message />
             <x-validation-errors :errors="$errors" />
@@ -34,7 +34,7 @@
             <div class="flex max-w-full mx-auto px-4 py-6 sm:px-6 lg:px-6">
                 <div class="md:w-1/3 px-3 mb-6 mr-6">
                     <x-label for="key" :value="__('Keyword')" class="{{$errors->has('keyword') ? 'text-red-600' :''}}" />
-                    <x-input id="keyword" class="block mt-1 w-full $errors->has('keyword') ? 'border-red-600' :''" type="text" name="keyword" {{--:value="$keyword"--}} :placeholder="__('Keyword')" autofocus />
+                    <x-input id="keyword" class="block mt-1 w-full $errors->has('keyword') ? 'border-red-600' :''" type="text" name="keyword" :value="$keyword" :placeholder="__('Keyword')" autofocus />
                 </div>
                 <div class="flex flex-wrap content-center">
                     <x-button class="px-10">
@@ -44,10 +44,9 @@
             </div>
 
             <div class="flex flex-col mx-6 mb-6 bg-white rounded">
-                @if(true)
-                {{-- @if(0 < $tasks->count()) --}}
+                @if(0 < $tasks->count())
                     <div class="flex justify-start p-2">
-                        {{-- $tasks->appends(request()->query())->links() --}}
+                        {{$tasks->appends(request()->query())->links()}}
                     </div>
                     <table class="min-w-max w-full table-auto">
                         <thead>
@@ -85,42 +84,43 @@
                             </tr>
                         </thead>
                         <tbody class="text-gray-600 text-sm font-light">
-                            {{-- @foreach($tasks as $task) --}}
-                            {{-- <tr class="border-b border-gray-200 hover:bg-gray-100 cursor-pointer @if($loop->even)bg-gray-50 @endif" onclick="location.href='route('tasks.edit', ['project' => $project->id, 'task' => $task->id])'"> --}}
+                            @foreach($tasks as $task)
+                            <tr class="border-b border-gray-200 hover:bg-gray-100 cursor-pointer @if($loop->even)bg-gray-50 @endif" onclick="location.href='{{route('tasks.edit', ['project' => $project->id, 'task' => $task->id])}}'">
                                 <td class="py-3 px-6 text-left whitespace-nowrap">
-                                    <span>{{-- $task->task_kind->name --}}</span>
+                                    <a class="underline font-medium text-gray-600 hover:text-gray-900" href="{{ route('tasks.edit', ['project' => $project->id, 'task' => $task->id]) }}">{{ $task->key }}</a>
                                 </td>
                                 <td class="py-3 px-6 text-left whitespace-nowrap">
-                                    <a class="underline font-medium text-gray-600 hover:text-gray-900" href="{{-- route('tasks.edit', ['project' => $project->id, 'task' => $task->id]) --}}">{{-- $task->key --}}</a>
+                                    <span>{{ $task->task_kind->name }}</span>
                                 </td>
                                 <td class="py-3 px-6 text-left max-w-sm truncate">
-                                    <a class="underline font-medium text-gray-600 hover:text-gray-900" href="{{-- route('tasks.edit', ['project' => $project->id, 'task' => $task->id]) --}}">{{-- $task->name --}}</a>
+                                    <a class="underline font-medium text-gray-600 hover:text-gray-900" href="{{ route('tasks.edit', ['project' => $project->id, 'task' => $task->id]) }}">{{ $task->name }}</a>
                                 </td>
-                                <td class="py-3 px-6 text-left">
-                                    @if(isset($task->assigner))
-                                    <span>{{-- $task->assigner->name --}}</span>
-                                    @endif
-                                </td>
-                                <td class="py-3 px-6 text-center">
-                                    <span>{{-- $task->created_at->format('Y/m/d') --}}</span>
-                                </td>
+                                {{-- <td class="py-3 px-6 text-center">
+                                    <span>{{$task->created_at->format('Y/m/d') }}</span>
+                                </td> --}}
                                 <td class="py-3 px-6 text-center">
                                     @if(isset($task->due_date))
-                                    <span>{{-- $task->due_date->format('Y/m/d') --}}</span>
+                                    <span>{{ $task->due_date->format('Y/m/d') }}</span>
                                     @endif
                                 </td>
                                 <td class="py-3 px-6 text-center">
-                                    <span>{{-- $task->updated_at->format('Y/m/d') --}}</span>
+                                    <span>優先度</span>
                                 </td>
                                 <td class="py-3 px-6 text-center">
-                                    <span>{{-- $task->user->name --}}</span>
+                                    <span>実施時間</span>
                                 </td>
+                                <td class="py-3 px-6 text-center">
+                                    <span>{{ $task->updated_at->format('Y/m/d') }}</span>
+                                </td>
+                                {{-- <td class="py-3 px-6 text-center">
+                                    <span>{{ $task->user->name }}</span>
+                                </td> --}}
                             </tr>
-                            {{-- @endforeach --}}
+                            @endforeach
                         </tbody>
                     </table>
                     <div class="flex justify-start p-2">
-                        {{-- $tasks->appends(request()->query())->links() --}}
+                        {{$tasks->appends(request()->query())->links()}}
                     </div>
                 @endif
             </div>
