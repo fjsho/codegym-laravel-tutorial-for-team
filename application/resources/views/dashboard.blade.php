@@ -25,7 +25,7 @@
             </div>
         </div>
 
-        <form method="GET" action="{{route('dashboard', ['project' => $project->id, 'user' => $user->id])}}">
+        <form method="GET" action="{{route('dashboard', ['project' => $project->id])}}">
             <!-- Validation Errors -->
             <x-flash-message />
             <x-validation-errors :errors="$errors" />
@@ -85,15 +85,18 @@
                         </thead>
                         <tbody class="text-gray-600 text-sm font-light">
                             @foreach($tasks as $task)
-                            <tr class="border-b border-gray-200 hover:bg-gray-100 cursor-pointer @if($loop->even)bg-gray-50 @endif" onclick="location.href='{{route('tasks.edit', ['project' => $project->id, 'task' => $task->id])}}'">
+                            <tr class="border-b border-gray-200 hover:bg-gray-100 cursor-pointer @if($loop->even)bg-gray-50 @endif" onclick="location.href='{{route('tasks.edit', ['project' => $task->project->id, 'task' => $task->id])}}'">
                                 <td class="py-3 px-6 text-left whitespace-nowrap">
-                                    <a class="underline font-medium text-gray-600 hover:text-gray-900" href="{{ route('tasks.edit', ['project' => $project->id, 'task' => $task->id]) }}">{{ $task->key }}</a>
+                                    <a class="underline font-medium text-gray-600 hover:text-gray-900" href="{{ route('tasks.edit', ['project' => $task->project->id, 'task' => $task->id]) }}">{{ $task->key }}</a>
                                 </td>
                                 <td class="py-3 px-6 text-left whitespace-nowrap">
                                     <span>{{ $task->task_kind->name }}</span>
                                 </td>
                                 <td class="py-3 px-6 text-left max-w-sm truncate">
-                                    <a class="underline font-medium text-gray-600 hover:text-gray-900" href="{{ route('tasks.edit', ['project' => $project->id, 'task' => $task->id]) }}">{{ $task->name }}</a>
+                                    <a class="underline font-medium text-gray-600 hover:text-gray-900" href="{{ route('tasks.edit', ['project' => $task->project->id, 'task' => $task->id]) }}">{{ $task->name }}</a>
+                                </td>
+                                <td class="py-3 px-6 text-left whitespace-nowrap">
+                                    <span>{{ $task->task_status->name }}</span>
                                 </td>
                                 {{-- <td class="py-3 px-6 text-center">
                                     <span>{{$task->created_at->format('Y/m/d') }}</span>
@@ -103,15 +106,16 @@
                                     <span>{{ $task->due_date->format('Y/m/d') }}</span>
                                     @endif
                                 </td>
+                                {{-- @TODO:優先度と実施時間が取得できるようになったらコードを修正する --}}
                                 <td class="py-3 px-6 text-center">
-                                    <span>優先度</span>
+                                    <span>優先度{{-- $tasks->task_priority->name --}}</span>
                                 </td>
                                 <td class="py-3 px-6 text-center">
-                                    <span>実施時間</span>
+                                    <span>実施時間{{-- $task->actual_time --}}</span>
                                 </td>
-                                <td class="py-3 px-6 text-center">
+                                {{-- <td class="py-3 px-6 text-center">
                                     <span>{{ $task->updated_at->format('Y/m/d') }}</span>
-                                </td>
+                                </td> --}}
                                 {{-- <td class="py-3 px-6 text-center">
                                     <span>{{ $task->user->name }}</span>
                                 </td> --}}
