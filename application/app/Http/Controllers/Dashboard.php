@@ -63,7 +63,7 @@ class Dashboard extends Controller
             ->paginate(20)
             ->appends(['keyword' => $keyword]);
 
-        return view('tasks.index', compact('tasks'), [
+            return view('dashboard', compact('tasks'), [
             'project' => $project,
             'assigners' => $assigners,
             'assigner_id' => $assigner_id,
