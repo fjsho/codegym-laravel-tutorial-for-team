@@ -25,7 +25,7 @@
             </div>
         </div>
 
-        <form method="GET" action="{{route('dashboard', ['project' => $project->id])}}">
+        <form method="GET" action="{{route('dashboard')}}">
             <!-- Validation Errors -->
             <x-flash-message />
             <x-validation-errors :errors="$errors" />

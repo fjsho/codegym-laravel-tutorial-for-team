@@ -15,7 +15,7 @@ class Dashboard extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function __invoke(Request $request, Project $project)
+    public function __invoke(Request $request)
     {
         $request->validate([
             'keyword' => 'max:255',
@@ -53,7 +53,6 @@ class Dashboard extends Controller
             ->appends(['keyword' => $keyword]);
 
         return view('dashboard', compact('tasks'), [
-            'project' => $project,
             'keyword' => $keyword,
         ]);
     }
