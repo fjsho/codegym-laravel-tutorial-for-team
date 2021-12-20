@@ -4,9 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Models\Project;
 use App\Models\Task;
-use App\Models\TaskCategory;
-use App\Models\TaskKind;
-use App\Models\TaskStatus;
 use App\Models\User;
 use Illuminate\Http\Request;
 
@@ -24,9 +21,6 @@ class Dashboard extends Controller
             'keyword' => 'max:255',
         ]);
 
-        $assigners = User::all();
-
-        $assigner_id = $request->input('assigner_id');
         $keyword = $request->input('keyword');
         $tasks = Task::select(
             'tasks.*',
@@ -58,7 +52,7 @@ class Dashboard extends Controller
             ->paginate(20)
             ->appends(['keyword' => $keyword]);
 
-            return view('dashboard', compact('tasks'), [
+        return view('dashboard', compact('tasks'), [
             'project' => $project,
             'keyword' => $keyword,
         ]);
