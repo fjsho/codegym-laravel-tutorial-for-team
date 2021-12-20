@@ -45,14 +45,6 @@ class CreateTasksTable extends Migration
             $table->softDeletes();
         });
 
-        Schema::create('task_priorities', function (Blueprint $table) {
-            $table->id();
-            $table->string('name');
-            $table->integer('display_order');
-            $table->timestamps();
-            $table->softDeletes();
-        });
-
         Schema::create('tasks', function (Blueprint $table) {
             $table->id();
             $table->foreignId('project_id')->constrained('projects');
@@ -65,10 +57,6 @@ class CreateTasksTable extends Migration
             $table->foreignId('task_category_id')->nullable()->constrained('task_categories');
             $table->date('due_date')->nullable();
             $table->foreignId('task_resolution_id')->nullable()->constrained('task_resolutions');
-            //task_prioriry_idの初期値は2=優先度中
-            $table->foreignId('task_priority_id')->constrained('task_priorities')->default('2');
-            $table->decimal('actual_time',5,2)->nullable();
-            $table->string('task_urgency')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });
@@ -86,6 +74,5 @@ class CreateTasksTable extends Migration
         Schema::dropIfExists('task_statuses');
         Schema::dropIfExists('task_categories');
         Schema::dropIfExists('task_resolutions');
-        Schema::dropIfExists('task_priorities');
     }
 }
