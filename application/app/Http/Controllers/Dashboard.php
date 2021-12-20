@@ -31,7 +31,8 @@ class Dashboard extends Controller
             ->with('assigner')
             ->with('user')
             ->with('project')
-            //->with('優先度')
+            //@TODOタスク優先度テーブルが作成されたらコメントアウト解除
+            //->with('task_priority')
             ->join('projects', 'tasks.project_id', 'projects.id') 
             ->where('assigner_id', '=', $request->user()->id);
         if ($request->has('keyword') && $keyword != '') {

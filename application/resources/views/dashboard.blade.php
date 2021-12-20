@@ -52,6 +52,9 @@
                         <thead>
                             <tr class="bg-gray-200 text-gray-600 text-sm leading-normal">
                                 <th class="py-3 px-6 text-left">
+                                    @sortablelink('project.name', __('Project Name'))
+                                </th>
+                                <th class="py-3 px-6 text-left">
                                     @sortablelink('id', __('Task Key'))
                                 </th>
                                 <th class="py-3 px-6 text-left">
@@ -63,9 +66,6 @@
                                 <th class="py-3 px-6 text-left">
                                     @sortablelink('task_status.name', __('Task Status'))
                                 </th>
-                                {{-- <th class="py-3 px-6 text-center">
-                                    @sortablelink('created_at', __('Created At'))
-                                </th> --}}
                                 <th class="py-3 px-6 text-center">
                                     @sortablelink('due_date', __('Due Date'))
                                 </th>
@@ -75,17 +75,14 @@
                                 <th class="py-3 px-6 text-center">
                                     @sortablelink('actual_time', __('Actual Time'))
                                 </th>
-                                {{-- <th class="py-3 px-6 text-center">
-                                    @sortablelink('updated_at', __('Updated At'))
-                                </th> --}}
-                                {{-- <th class="py-3 px-6 text-center">
-                                    @sortablelink('user.name', __('Created User'))
-                                </th> --}}
                             </tr>
                         </thead>
                         <tbody class="text-gray-600 text-sm font-light">
                             @foreach($tasks as $task)
                             <tr class="border-b border-gray-200 hover:bg-gray-100 cursor-pointer @if($loop->even)bg-gray-50 @endif" onclick="location.href='{{route('tasks.edit', ['project' => $task->project->id, 'task' => $task->id])}}'">
+                                <td class="py-3 px-6 text-left">
+                                    <a class="underline font-medium text-gray-600 hover:text-gray-900" href="{{ route('projects.edit', ['project' => $task->project->id]) }}">{{ $task->project->name }}</a>
+                                </td>
                                 <td class="py-3 px-6 text-left whitespace-nowrap">
                                     <a class="underline font-medium text-gray-600 hover:text-gray-900" href="{{ route('tasks.edit', ['project' => $task->project->id, 'task' => $task->id]) }}">{{ $task->key }}</a>
                                 </td>
@@ -98,9 +95,6 @@
                                 <td class="py-3 px-6 text-left whitespace-nowrap">
                                     <span>{{ $task->task_status->name }}</span>
                                 </td>
-                                {{-- <td class="py-3 px-6 text-center">
-                                    <span>{{$task->created_at->format('Y/m/d') }}</span>
-                                </td> --}}
                                 <td class="py-3 px-6 text-center">
                                     @if(isset($task->due_date))
                                     <span>{{ $task->due_date->format('Y/m/d') }}</span>
@@ -113,12 +107,6 @@
                                 <td class="py-3 px-6 text-center">
                                     <span>実施時間{{-- $task->actual_time --}}</span>
                                 </td>
-                                {{-- <td class="py-3 px-6 text-center">
-                                    <span>{{ $task->updated_at->format('Y/m/d') }}</span>
-                                </td> --}}
-                                {{-- <td class="py-3 px-6 text-center">
-                                    <span>{{ $task->user->name }}</span>
-                                </td> --}}
                             </tr>
                             @endforeach
                         </tbody>
