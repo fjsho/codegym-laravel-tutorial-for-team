@@ -43,15 +43,13 @@ class Dashboard extends Controller
         if ($request->has('keyword') && $keyword != '') {
             $tasks
                 ->join('users as search_users', 'tasks.created_user_id', 'search_users.id')
-                ->join('task_kinds as search_task_kinds', 'tasks.task_kind_id', 'search_task_kinds.id')
-                ->leftJoin('users as search_assigner', 'tasks.assigner_id', 'search_assigner.id');
+                ->join('task_kinds as search_task_kinds', 'tasks.task_kind_id', 'search_task_kinds.id');
             $tasks
                 ->where(function ($tasks) use ($keyword) {
                     $tasks
                         ->where('search_task_kinds.name', 'like', '%'.$keyword.'%')
                         ->orWhere('projects.key', 'like', '%'.$keyword.'%')
                         ->orWhere('tasks.name', 'like', '%'.$keyword.'%')
-                        ->orWhere('search_assigner.name', 'like', '%'.$keyword.'%')
                         ->orWhere('search_users.name', 'like', '%'.$keyword.'%');
                 });
         }
