@@ -55,9 +55,6 @@ class Dashboard extends Controller
                         ->orWhere('search_users.name', 'like', '%'.$keyword.'%');
                 });
         }
-        if ($request->has('assigner_id') && isset($assigner_id)) {
-            $tasks->where('tasks.assigner_id', '=', $assigner_id);
-        }
         $tasks = $tasks
             ->sortable('name')
             ->paginate(20)
@@ -65,8 +62,6 @@ class Dashboard extends Controller
 
             return view('dashboard', compact('tasks'), [
             'project' => $project,
-            'assigners' => $assigners,
-            'assigner_id' => $assigner_id,
             'keyword' => $keyword,
         ]);
     }
