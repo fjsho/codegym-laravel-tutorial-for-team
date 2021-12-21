@@ -33,6 +33,8 @@ class Dashboard extends Controller
             ->with('project')
             //@TODOタスク優先度テーブルが作成されたらコメントアウト解除
             //->with('task_priority')
+            //別名をつけておかないと@sortablelinkを押したときにエラーになるので注意（SQL文でテーブル名が競合する）
+            ->join('projects as search_projects', 'tasks.project_id', 'search_projects.id')
             ->where('assigner_id', '=', $request->user()->id);
         if ($request->has('keyword') && $keyword != '') {
             $tasks
@@ -42,7 +44,7 @@ class Dashboard extends Controller
                 ->where(function ($tasks) use ($keyword) {
                     $tasks
                         ->where('search_task_kinds.name', 'like', '%'.$keyword.'%')
-                        ->orWhere('projects.key', 'like', '%'.$keyword.'%')
+                        ->orWhere('search_projects.key', 'like', '%'.$keyword.'%')
                         ->orWhere('tasks.name', 'like', '%'.$keyword.'%')
                         ->orWhere('search_users.name', 'like', '%'.$keyword.'%');
                 });
