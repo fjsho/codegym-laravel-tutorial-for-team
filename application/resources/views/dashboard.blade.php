@@ -70,7 +70,7 @@
                                     @sortablelink('due_date', __('Due Date'))
                                 </th>
                                 <th class="py-3 px-6 text-center">
-                                    @sortablelink('task_priority.name', __('Task Priority'))
+                                    @sortablelink('task_priority.display_order', __('Task Priority'))
                                 </th>
                                 <th class="py-3 px-6 text-center">
                                     @sortablelink('actual_time', __('Actual Time'))
@@ -100,12 +100,11 @@
                                     <span>{{ $task->due_date->format('Y/m/d') }}</span>
                                     @endif
                                 </td>
-                                {{-- @TODO:優先度と実施時間が取得できるようになったらコードを修正する --}}
                                 <td class="py-3 px-6 text-center">
-                                    <span>優先度{{-- $tasks->task_priority->name --}}</span>
+                                    <span>{{ $task->task_priority->name }}</span>
                                 </td>
                                 <td class="py-3 px-6 text-center">
-                                    <span>実施時間{{-- $task->actual_time --}}</span>
+                                    <span>{{ $task->actual_time }}</span>
                                 </td>
                             </tr>
                             @endforeach

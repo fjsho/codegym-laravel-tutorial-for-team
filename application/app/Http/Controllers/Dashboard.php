@@ -29,8 +29,7 @@ class Dashboard extends Controller
             ->with('assigner')
             ->with('user')
             ->with('project')
-            //@TODOタスク優先度テーブルが作成されたらコメントアウト解除
-            //->with('task_priority')
+            ->with('task_priority')
             //別名をつけておかないと@sortablelinkを押したときにエラーになるので注意（SQL文でテーブル名が競合する）
             ->join('projects as search_projects', 'tasks.project_id', 'search_projects.id')
             ->where('assigner_id', '=', $request->user()->id);
