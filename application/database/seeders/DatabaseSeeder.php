@@ -17,6 +17,7 @@ class DatabaseSeeder extends Seeder
         $this->call(TaskKind::class);
         $this->call(TaskResolution::class);
         $this->call(TaskStatus::class);
+        $this->call(TaskPriority::class);
 
         \App\Models\User::factory(10)
             ->hasProjects(3)
