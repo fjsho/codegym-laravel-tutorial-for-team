@@ -5,10 +5,10 @@ namespace Database\Factories;
 use App\Models\Project;
 use App\Models\Task;
 use App\Models\TaskCategory;
+use App\Models\TaskPriority;
 use App\Models\TaskKind;
 use App\Models\TaskResolution;
 use App\Models\TaskStatus;
-use App\Models\TaskPriority;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
@@ -38,6 +38,7 @@ class TaskFactory extends Factory
             'updated_user_id' => optional(User::inRandomOrder()->first())->id,
             'assigner_id' => optional(User::inRandomOrder()->first())->id,
             'task_category_id' => optional(TaskCategory::inRandomOrder()->first())->id,
+            'task_priority_id' => optional(TaskPriority::inRandomOrder()->first())->id,
             'task_resolution_id' => optional(TaskResolution::inRandomOrder()->first())->id,
             'task_priority_id' => optional(TaskPriority::inRandomOrder()->first())->id,
             'actual_time' => $this->faker->randomFloat(2, 0, 999)
