@@ -95,7 +95,7 @@ return [
     'numeric'              => ':attributeには、数字を指定してください。',
     'password'             => 'パスワードが正しくありません。',
     'present'              => ':attributeが存在している必要があります。',
-    'regex'                => ':attributeには、有効な正規表現を指定してください。',
+    'regex'                => ':attributeには、0〜999.99までの半角数字（小数点以下２桁以内）を指定してください。',
     'required'             => ':attributeは、必ず指定してください。',
     'required_if'          => ':otherが:valueの場合、:attributeを指定してください。',
     'required_unless'      => ':otherが:values以外の場合、:attributeを指定してください。',
