@@ -27,6 +27,7 @@ class Task extends Model
         'updated_user_id',
         'assigner_id',
         'task_category_id',
+        'task_priority_id',
         'due_date',
         'task_resolution_id',
     ];
@@ -118,6 +119,14 @@ class Task extends Model
     public function task_category()
     {
         return $this->belongsTo(TaskCategory::class, 'task_category_id');
+    }
+
+    /**
+     * 課題の優先度を取得.
+     */
+    public function task_priority()
+    {
+        return $this->belongsTo(TaskPriority::class, 'task_priority_id');
     }
 
     /**
