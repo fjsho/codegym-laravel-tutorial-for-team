@@ -111,7 +111,7 @@ class TaskController extends Controller
             'task_priority_id' => 'nullable|integer',
             'task_resolution_id' => 'nullable|integer',
             'due_date' => 'nullable|date',
-            'actual_time' => ['nullable', 'numeric', 'regex:/^0$|[0-9]{1,3}|^\d{1,3}(\.\d{1,2})$/'],
+            'actual_time' => ['numeric', 'regex:/^0$|[0-9]{1,3}|^\d{1,3}(\.\d{1,2})$/'],
         ]);
 
         if (Task::create([
@@ -188,7 +188,7 @@ class TaskController extends Controller
             'task_priority_id' => 'nullable|integer',
             'task_resolution_id' => 'nullable|integer',
             'due_date' => 'nullable|date',
-            'actual_time' => ['nullable', 'numeric', 'regex:/^0$|[0-9]{1,3}|^\d{1,3}(\.\d{1,2})$/'],
+            'actual_time' => ['numeric', 'regex:/^0$|[0-9]{1,3}|^\d{1,3}(\.\d{1,2})$/'],
         ]);
 
         if ($task->update($request->all())) {
