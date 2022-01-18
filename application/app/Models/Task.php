@@ -131,10 +131,8 @@ class Task extends Model
     }
 
     /**
-     * 課題の優先度を取得
+     * 課題の優先度を取得.
      */
-
-    //@TODO 佐藤さんの作業と競合する可能性あり。実装時の確認は必須。
     public function task_priority()
     {
         return $this->belongsTo(TaskPriority::class, 'task_priority_id');
