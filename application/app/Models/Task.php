@@ -30,6 +30,7 @@ class Task extends Model
         'task_priority_id',
         'due_date',
         'task_resolution_id',
+        'actual_time',
     ];
 
     /**
@@ -135,5 +136,13 @@ class Task extends Model
     public function task_resolution()
     {
         return $this->belongsTo(TaskResolution::class, 'task_resolution_id');
+    }
+
+    /**
+     * 実施時間を取得.
+     */
+    public function actual_time()
+    {
+        return $this->belongsTo(ActualTime::class, 'actual_time');
     }
 }
