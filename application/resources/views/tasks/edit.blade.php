@@ -115,11 +115,11 @@
                     </div>
                     <div class="md:w-1/4 px-3 mb-6">
                         <x-label for="task_priority_id" :value="__('Task Priority')" class="{{ $errors->has('task_priority_id') ? 'text-red-600' :'' }}" />
-                        <x-select :options="$task_priorities" id="task_priority_id" class="block mt-1 w-full {{ $errors->has('task_priority_id') ? 'border-red-600' :'' }}" type="text" name="task_priority_id" :value="old('task_priority_id')" autofocus />
+                        <x-select :options="$task_priorities" id="task_priority_id" class="block mt-1 w-full {{ $errors->has('task_priority_id') ? 'border-red-600' :'' }}" type="text" name="task_priority_id" :value="old('task_priority_id', $task->task_priority_id)" autofocus />
                     </div>
                     <div class="md:w-1/4 px-3 mb-6">
                         <x-label for="actual_time" :value="__('Actual Time')" class="{{ $errors->has('actual_time') ? 'text-red-600' :'' }}" />
-                        <x-textarea id="actual_time" class="block mt-1 w-full {{ $errors->has('actual_time') ? 'border-red-600' :'' }}" type="text" name="actual_time" :value="old('actual_time')" placeholder="例：１、0.25、36" />
+                        <x-input id="actual_time" class="block mt-1 w-full {{ $errors->has('actual_time') ? 'border-red-600' :'' }}" type="text" name="actual_time" :value="old('actual_time', $task->actual_time)" placeholder="例：1、0.25、36" />
                     </div>
                 </div>
             </div>
