@@ -15,8 +15,8 @@ class UpdateTasksTable extends Migration
     {
         Schema::table('tasks', function (Blueprint $table) {
             //task_prioriry_idの初期値は2=優先度中
-            $table->foreignId('task_priority_id')->constrained('task_priorities')->default('2');
-            $table->decimal('actual_time',5,2)->nullable();
+            $table->foreignId('task_priority_id')->nullable()->constrained('task_priorities')->default('2');
+            $table->decimal('actual_time', 5, 2)->nullable();
             $table->string('task_urgency')->nullable();
         });
     }
