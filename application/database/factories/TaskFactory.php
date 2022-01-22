@@ -5,10 +5,10 @@ namespace Database\Factories;
 use App\Models\Project;
 use App\Models\Task;
 use App\Models\TaskCategory;
+use App\Models\TaskPriority;
 use App\Models\TaskKind;
 use App\Models\TaskResolution;
 use App\Models\TaskStatus;
-use App\Models\TaskPriority;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Project;
 use App\Models\Task;
 use App\Models\TaskCategory;
+use App\Models\TaskPriority;
 use App\Models\TaskKind;
 use App\Models\TaskStatus;
 use App\Models\User;
@@ -47,11 +48,11 @@ class TaskController extends Controller
             $tasks
                 ->where(function ($tasks) use ($keyword) {
                     $tasks
-                        ->where('search_task_kinds.name', 'like', '%'.$keyword.'%')
-                        ->orWhere('projects.key', 'like', '%'.$keyword.'%')
-                        ->orWhere('tasks.name', 'like', '%'.$keyword.'%')
-                        ->orWhere('search_assigner.name', 'like', '%'.$keyword.'%')
-                        ->orWhere('search_users.name', 'like', '%'.$keyword.'%');
+                        ->where('search_task_kinds.name', 'like', '%' . $keyword . '%')
+                        ->orWhere('projects.key', 'like', '%' . $keyword . '%')
+                        ->orWhere('tasks.name', 'like', '%' . $keyword . '%')
+                        ->orWhere('search_assigner.name', 'like', '%' . $keyword . '%')
+                        ->orWhere('search_users.name', 'like', '%' . $keyword . '%');
                 });
         }
         if ($request->has('assigner_id') && isset($assigner_id)) {
@@ -80,6 +81,7 @@ class TaskController extends Controller
         $task_kinds = TaskKind::all();
         $task_statuses = TaskStatus::all();
         $task_categories = TaskCategory::all();
+        $task_priorities = TaskPriority::all();
         $assigners = User::all();
 
         return view('tasks.create', [
@@ -87,6 +89,7 @@ class TaskController extends Controller
             'task_kinds' => $task_kinds,
             'task_statuses' => $task_statuses,
             'task_categories' => $task_categories,
+            'task_priorities' => $task_priorities,
             'assigners' => $assigners,
         ]);
     }
@@ -105,8 +108,10 @@ class TaskController extends Controller
             'task_status_id' => 'required|integer',
             'assigner_id' => 'nullable|integer',
             'task_category_id' => 'nullable|integer',
+            'task_priority_id' => 'nullable|integer',
             'task_resolution_id' => 'nullable|integer',
             'due_date' => 'nullable|date',
+            'actual_time' => ['nullable', 'numeric', 'regex:/^[0-9]{1,3}$|^\d{1,3}(\.\d{1,2})$/'],
         ]);
 
         if (Task::create([
@@ -116,8 +121,10 @@ class TaskController extends Controller
             'task_status_id' => $request->task_status_id,
             'assigner_id' => $request->assigner_id,
             'task_category_id' => $request->task_category_id,
+            'task_priority_id' => $request->task_priority_id,
             'due_date' => $request->due_date,
             'created_user_id' => $request->user()->id,
+            'actual_time' => $request->actual_time,
         ])) {
             $flash = ['success' => __('Task created successfully.')];
         } else {
@@ -150,6 +157,7 @@ class TaskController extends Controller
         $task_kinds = TaskKind::all();
         $task_statuses = TaskStatus::all();
         $task_categories = TaskCategory::all();
+        $task_priorities = TaskPriority::all();
         $assigners = User::all();
 
         return view('tasks.edit', [
@@ -157,6 +165,7 @@ class TaskController extends Controller
             'task_kinds' => $task_kinds,
             'task_statuses' => $task_statuses,
             'task_categories' => $task_categories,
+            'task_priorities' => $task_priorities,
             'assigners' => $assigners,
             'task' => $task,
         ]);
@@ -177,8 +186,10 @@ class TaskController extends Controller
             'task_status_id' => 'required|integer',
             'assigner_id' => 'nullable|integer',
             'task_category_id' => 'nullable|integer',
+            'task_priority_id' => 'nullable|integer',
             'task_resolution_id' => 'nullable|integer',
             'due_date' => 'nullable|date',
+            'actual_time' => ['nullable', 'numeric', 'regex:/^[0-9]{1,3}$|^\d{1,3}(\.\d{1,2})$/'],
         ]);
 
         if ($task->update($request->all())) {

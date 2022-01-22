@@ -189,6 +189,7 @@ class TaskEditTest extends TestCase
             'name' => $this->faker->words(rand(1, 5), true),
             'task_status_id' => TaskStatus::inRandomOrder()->first()->id,
             'task_category_id' => 'ほげ',
+            'task_priority_id' => 'ほげ',
         ];
 
         $response = $this->actingAs($user)

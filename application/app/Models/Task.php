@@ -27,8 +27,10 @@ class Task extends Model
         'updated_user_id',
         'assigner_id',
         'task_category_id',
+        'task_priority_id',
         'due_date',
         'task_resolution_id',
+        'actual_time',
     ];
 
     /**
@@ -123,6 +125,14 @@ class Task extends Model
     }
 
     /**
+     * 課題の優先度を取得.
+     */
+    public function task_priority()
+    {
+        return $this->belongsTo(TaskPriority::class, 'task_priority_id');
+    }
+
+    /**
      * 課題の完了理由を取得.
      */
     public function task_resolution()
@@ -130,6 +140,14 @@ class Task extends Model
         return $this->belongsTo(TaskResolution::class, 'task_resolution_id');
     }
 
+    /**
+     * 実施時間を取得.
+     */
+    public function actual_time()
+    {
+        return $this->belongsTo(ActualTime::class, 'actual_time');
+    }
+  
     /**
      * 課題の優先度を取得.
      */

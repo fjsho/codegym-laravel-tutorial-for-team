@@ -14,10 +14,10 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         $this->call(TaskCategory::class);
+        $this->call(TaskPriority::class);
         $this->call(TaskKind::class);
         $this->call(TaskResolution::class);
         $this->call(TaskStatus::class);
-        $this->call(TaskPriority::class);
 
         \App\Models\User::factory(10)
             ->hasProjects(3)

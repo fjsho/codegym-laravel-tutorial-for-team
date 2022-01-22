@@ -4,6 +4,7 @@ namespace Tests\Feature;
 
 use App\Models\Project;
 use App\Models\TaskCategory;
+use App\Models\TaskPriority;
 use App\Models\TaskKind;
 use App\Models\TaskResolution;
 use App\Models\TaskStatus;
@@ -63,6 +64,7 @@ class TaskCreateTest extends TestCase
             'updated_user_id' => optional(User::inRandomOrder()->first())->id,
             'assigner_id' => optional(User::inRandomOrder()->first())->id,
             'task_category_id' => optional(TaskCategory::inRandomOrder()->first())->id,
+            'task_priority_id' => optional(TaskPriority::inRandomOrder()->first())->id,
             'task_resolution_id' => optional(TaskResolution::inRandomOrder()->first())->id,
             'due_date' => date('Y/m/d'),
         ]);
@@ -257,6 +259,7 @@ class TaskCreateTest extends TestCase
             'task_kind_id' => optional(TaskKind::inRandomOrder()->first())->id,
             'task_status_id' => optional(TaskStatus::inRandomOrder()->first())->id,
             'task_category_id' => 'a',
+            'task_priority_id' => 'a',
         ]);
 
         $response->assertSessionHasErrors();
