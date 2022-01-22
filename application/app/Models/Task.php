@@ -46,6 +46,8 @@ class Task extends Model
         'created_at',
         'due_date',
         'updated_at',
+        'task_priority',
+        'actual_time',
         'user',
     ];
 
@@ -144,5 +146,13 @@ class Task extends Model
     public function actual_time()
     {
         return $this->belongsTo(ActualTime::class, 'actual_time');
+    }
+  
+    /**
+     * 課題の優先度を取得.
+     */
+    public function task_priority()
+    {
+        return $this->belongsTo(TaskPriority::class, 'task_priority_id');
     }
 }
